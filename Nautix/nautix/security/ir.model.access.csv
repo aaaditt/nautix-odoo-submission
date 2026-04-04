@@ -1,2 +1,7 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_nautix_model,access_nautix_model,model_nautix_model,base.group_user,1,1,1,1
+access_nautix_vessel,access_nautix_vessel,model_nautix_vessel,base.group_user,1,1,1,1
+access_nautix_port,access_nautix_port,model_nautix_port,base.group_user,1,1,1,1
+access_nautix_cargo_type,access_nautix_cargo_type,model_nautix_cargo_type,base.group_user,1,1,1,1
+access_nautix_charter,access_nautix_charter,model_nautix_charter,base.group_user,1,1,1,1
+access_nautix_voyage,access_nautix_voyage,model_nautix_voyage,base.group_user,1,1,1,1
+access_nautix_invoice_line,access_nautix_invoice_line,model_nautix_invoice_line,base.group_user,1,1,1,1
