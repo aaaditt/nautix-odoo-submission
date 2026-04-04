@@ -1,12 +1,15 @@
 {
-    "name": "Nautix",
+    "name": "Nautix — Ship Chartering",
+    "version": "19.0.1.0.0",
     "author": "Aadit",
     "license": "LGPL-3",
-    "depends": ["base"],
+    "depends": ["base", "mail", "account"],
     "application": True,
+    "installable": True,
     "data": [
         "security/ir.model.access.csv",
-        "views/nautix_views.xml",
-        "views/nautix_menus.xml",
+        "data/sequences.xml",
+        "report/charter_party_report.xml",
+        "views/views.xml",
     ]
 }

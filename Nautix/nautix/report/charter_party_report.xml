@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Report Action -->
+    <record id="action_report_charter_party" model="ir.actions.report">
+        <field name="name">Charter Party</field>
+        <field name="model">nautix.charter</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">nautix.report_charter_party</field>
+        <field name="report_file">nautix.report_charter_party</field>
+        <field name="binding_model_id" ref="model_nautix_charter"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- QWeb Report Template -->
+    <template id="report_charter_party">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+
+                    <div class="page" style="font-family: Arial, sans-serif;">
+
+                        <!-- Title -->
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <h1 style="margin-bottom: 4px;">CHARTER PARTY</h1>
+                            <h3 style="color: #555;" t-field="o.name"/>
+                        </div>
+
+                        <hr style="border: 1px solid #333;"/>
+
+                        <!-- Charter Overview -->
+                        <table class="table table-bordered mt-3" style="font-size: 13px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width:30%; font-weight:bold; background:#f5f5f5;">Charter Reference</td>
+                                    <td t-field="o.name"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Charter Type</td>
+                                    <td t-field="o.charter_type"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Status</td>
+                                    <td t-field="o.state"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Vessel Details -->
+                        <h4 class="mt-4" style="border-bottom: 2px solid #333; padding-bottom: 4px;">Vessel Details</h4>
+                        <table class="table table-bordered" style="font-size: 13px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width:30%; font-weight:bold; background:#f5f5f5;">Vessel Name</td>
+                                    <td t-field="o.vessel_id.name"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">IMO Number</td>
+                                    <td t-field="o.vessel_id.imo_number"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Vessel Type</td>
+                                    <td t-field="o.vessel_id.vessel_type"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Flag State</td>
+                                    <td t-field="o.vessel_id.flag_state"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">DWT</td>
+                                    <td t-field="o.vessel_id.dwt"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Parties -->
+                        <h4 class="mt-4" style="border-bottom: 2px solid #333; padding-bottom: 4px;">Parties</h4>
+                        <table class="table table-bordered" style="font-size: 13px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width:30%; font-weight:bold; background:#f5f5f5;">Owner</td>
+                                    <td t-field="o.owner_id"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Charterer</td>
+                                    <td t-field="o.charterer_id"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Dates &amp; Laycan -->
+                        <h4 class="mt-4" style="border-bottom: 2px solid #333; padding-bottom: 4px;">Dates &amp; Laycan</h4>
+                        <table class="table table-bordered" style="font-size: 13px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width:30%; font-weight:bold; background:#f5f5f5;">Charter Start</td>
+                                    <td t-field="o.date_start"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Charter End</td>
+                                    <td t-field="o.date_end"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Laycan From</td>
+                                    <td t-field="o.laycan_from"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Laycan To</td>
+                                    <td t-field="o.laycan_to"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Financial Terms -->
+                        <h4 class="mt-4" style="border-bottom: 2px solid #333; padding-bottom: 4px;">Financial Terms</h4>
+                        <table class="table table-bordered" style="font-size: 13px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width:30%; font-weight:bold; background:#f5f5f5;">Currency</td>
+                                    <td t-field="o.currency_id"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Daily Hire Rate</td>
+                                    <td t-field="o.hire_rate"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Lump Sum Freight</td>
+                                    <td t-field="o.lump_sum_freight"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Cargo &amp; Ports -->
+                        <h4 class="mt-4" style="border-bottom: 2px solid #333; padding-bottom: 4px;">Cargo &amp; Ports</h4>
+                        <table class="table table-bordered" style="font-size: 13px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width:30%; font-weight:bold; background:#f5f5f5;">Cargo Type</td>
+                                    <td t-field="o.cargo_id"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Cargo Quantity</td>
+                                    <td t-field="o.cargo_quantity"/>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Load Port(s)</td>
+                                    <td>
+                                        <t t-foreach="o.load_port_ids" t-as="port">
+                                            <span t-field="port.name"/>
+                                            <t t-if="not port_last">, </t>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold; background:#f5f5f5;">Discharge Port(s)</td>
+                                    <td>
+                                        <t t-foreach="o.discharge_port_ids" t-as="port">
+                                            <span t-field="port.name"/>
+                                            <t t-if="not port_last">, </t>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Special Clauses / Notes -->
+                        <t t-if="o.notes">
+                            <h4 class="mt-4" style="border-bottom: 2px solid #333; padding-bottom: 4px;">Special Clauses</h4>
+                            <div style="border: 1px solid #ddd; padding: 12px; background: #fafafa; font-size: 13px; white-space: pre-wrap;"
+                                 t-field="o.notes"/>
+                        </t>
+
+                        <!-- Signatures -->
+                        <div class="row mt-5" style="font-size: 13px;">
+                            <div class="col-6" style="text-align: center;">
+                                <div style="border-top: 1px solid #333; width: 70%; margin: 60px auto 8px;">
+                                    For and on behalf of <strong>Owner</strong>
+                                </div>
+                                <span t-field="o.owner_id"/>
+                            </div>
+                            <div class="col-6" style="text-align: center;">
+                                <div style="border-top: 1px solid #333; width: 70%; margin: 60px auto 8px;">
+                                    For and on behalf of <strong>Charterer</strong>
+                                </div>
+                                <span t-field="o.charterer_id"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

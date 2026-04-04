@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- =============================================================== -->
+    <!--                        VESSEL VIEWS                             -->
+    <!-- =============================================================== -->
+
+    <!-- Vessel List View -->
+    <record id="view_nautix_vessel_tree" model="ir.ui.view">
+        <field name="name">nautix.vessel.tree</field>
+        <field name="model">nautix.vessel</field>
+        <field name="arch" type="xml">
+            <list string="Vessels">
+                <field name="name"/>
+                <field name="imo_number"/>
+                <field name="vessel_type"/>
+                <field name="flag_state"/>
+                <field name="dwt"/>
+                <field name="status"
+                       decoration-success="status == 'available'"
+                       decoration-info="status == 'on_charter'"
+                       decoration-warning="status == 'under_repair'"
+                       decoration-muted="status == 'laid_up'"
+                       widget="badge"/>
+                <field name="owner_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vessel Form View -->
+    <record id="view_nautix_vessel_form" model="ir.ui.view">
+        <field name="name">nautix.vessel.form</field>
+        <field name="model">nautix.vessel</field>
+        <field name="arch" type="xml">
+            <form string="Vessel">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Vessel Name"/></h1>
+                    </div>
+                    <group>
+                        <group string="General Info">
+                            <field name="imo_number"/>
+                            <field name="vessel_type"/>
+                            <field name="flag_state"/>
+                            <field name="year_built"/>
+                            <field name="owner_id"/>
+                            <field name="status"/>
+                        </group>
+                        <group string="Technical Specs">
+                            <field name="dwt"/>
+                            <field name="grt"/>
+                            <field name="loa"/>
+                            <field name="beam"/>
+                            <field name="draft"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Certification">
+                            <field name="classification_society"/>
+                            <field name="next_drydock"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vessel Action -->
+    <record id="action_nautix_vessel" model="ir.actions.act_window">
+        <field name="name">Vessels</field>
+        <field name="res_model">nautix.vessel</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- =============================================================== -->
+    <!--                         PORT VIEWS                              -->
+    <!-- =============================================================== -->
+
+    <!-- Port List View -->
+    <record id="view_nautix_port_tree" model="ir.ui.view">
+        <field name="name">nautix.port.tree</field>
+        <field name="model">nautix.port</field>
+        <field name="arch" type="xml">
+            <list string="Ports">
+                <field name="name"/>
+                <field name="unlocode"/>
+                <field name="country_id"/>
+                <field name="port_type"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Port Form View -->
+    <record id="view_nautix_port_form" model="ir.ui.view">
+        <field name="name">nautix.port.form</field>
+        <field name="model">nautix.port</field>
+        <field name="arch" type="xml">
+            <form string="Port">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="unlocode"/>
+                        </group>
+                        <group>
+                            <field name="country_id"/>
+                            <field name="port_type"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Port Action -->
+    <record id="action_nautix_port" model="ir.actions.act_window">
+        <field name="name">Ports</field>
+        <field name="res_model">nautix.port</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- =============================================================== -->
+    <!--                      CARGO TYPE VIEWS                           -->
+    <!-- =============================================================== -->
+
+    <!-- Cargo Type List View -->
+    <record id="view_nautix_cargo_type_tree" model="ir.ui.view">
+        <field name="name">nautix.cargo.type.tree</field>
+        <field name="model">nautix.cargo.type</field>
+        <field name="arch" type="xml">
+            <list string="Cargo Types">
+                <field name="name"/>
+                <field name="category"/>
+                <field name="hazardous"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cargo Type Form View -->
+    <record id="view_nautix_cargo_type_form" model="ir.ui.view">
+        <field name="name">nautix.cargo.type.form</field>
+        <field name="model">nautix.cargo.type</field>
+        <field name="arch" type="xml">
+            <form string="Cargo Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="category"/>
+                        </group>
+                        <group>
+                            <field name="hazardous"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cargo Type Action -->
+    <record id="action_nautix_cargo_type" model="ir.actions.act_window">
+        <field name="name">Cargo Types</field>
+        <field name="res_model">nautix.cargo.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- =============================================================== -->
+    <!--                       CHARTER VIEWS                             -->
+    <!-- =============================================================== -->
+
+    <!-- Charter List View -->
+    <record id="view_nautix_charter_tree" model="ir.ui.view">
+        <field name="name">nautix.charter.tree</field>
+        <field name="model">nautix.charter</field>
+        <field name="arch" type="xml">
+            <list string="Charters">
+                <field name="name"/>
+                <field name="vessel_id"/>
+                <field name="charterer_id"/>
+                <field name="charter_type"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="hire_rate"/>
+                <field name="state"
+                       decoration-muted="state == 'draft'"
+                       decoration-info="state == 'negotiation'"
+                       decoration-warning="state == 'fixed'"
+                       decoration-success="state == 'active'"
+                       decoration-bf="state == 'completed'"
+                       decoration-danger="state == 'cancelled'"
+                       widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Charter Form View -->
+    <record id="view_nautix_charter_form" model="ir.ui.view">
+        <field name="name">nautix.charter.form</field>
+        <field name="model">nautix.charter</field>
+        <field name="arch" type="xml">
+            <form string="Charter">
+                <header>
+                    <button name="action_to_negotiation" string="To Negotiation"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <button name="action_fix" string="Fix Charter"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'negotiation'"/>
+                    <button name="action_activate" string="Activate"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'fixed'"/>
+                    <button name="action_complete" string="Complete"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'active'"/>
+                    <button name="action_cancel" string="Cancel"
+                            type="object"
+                            invisible="state in ('completed', 'cancelled')"/>
+                    <button name="%(action_report_charter_party)d" string="Print Charter Party"
+                            type="action" class="oe_highlight"
+                            invisible="state in ('draft', 'cancelled')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,negotiation,fixed,active,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="charter_type"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Charter Details">
+                            <group>
+                                <group>
+                                    <field name="vessel_id"/>
+                                    <field name="charterer_id"/>
+                                </group>
+                                <group>
+                                    <field name="owner_id"/>
+                                    <field name="currency_id"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Cargo &amp; Ports">
+                            <group>
+                                <group>
+                                    <field name="cargo_id"/>
+                                    <field name="cargo_quantity"/>
+                                </group>
+                                <group>
+                                    <field name="laycan_from"/>
+                                    <field name="laycan_to"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="load_port_ids" widget="many2many_tags"/>
+                                </group>
+                                <group>
+                                    <field name="discharge_port_ids" widget="many2many_tags"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Financials">
+                            <group>
+                                <group>
+                                    <field name="hire_rate"/>
+                                    <field name="lump_sum_freight"/>
+                                </group>
+                                <group>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Voyages">
+                            <field name="voyage_ids">
+                                <list editable="bottom">
+                                    <field name="departure_port_id"/>
+                                    <field name="arrival_port_id"/>
+                                    <field name="etd"/>
+                                    <field name="eta"/>
+                                    <field name="atd"/>
+                                    <field name="ata"/>
+                                    <field name="status"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hire Invoices">
+                            <field name="invoice_line_ids">
+                                <list editable="bottom">
+                                    <field name="period_from"/>
+                                    <field name="period_to"/>
+                                    <field name="hire_days" readonly="1"/>
+                                    <field name="hire_rate" readonly="1"/>
+                                    <field name="total_hire" readonly="1"/>
+                                    <field name="currency_id"/>
+                                    <field name="invoice_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Add notes here..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Charter Kanban View -->
+    <record id="view_nautix_charter_kanban" model="ir.ui.view">
+        <field name="name">nautix.charter.kanban</field>
+        <field name="model">nautix.charter</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="name"/>
+                <field name="vessel_id"/>
+                <field name="charterer_id"/>
+                <field name="hire_rate"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div class="o_kanban_record_subtitle">
+                                    <field name="vessel_id"/>
+                                </div>
+                                <div>
+                                    <field name="charterer_id"/>
+                                </div>
+                                <div>
+                                    Hire: <field name="hire_rate"/>/day
+                                </div>
+                                <div class="mt-1">
+                                    <field name="state" widget="label_selection"
+                                           options="{'classes': {
+                                               'draft': 'secondary',
+                                               'negotiation': 'info',
+                                               'fixed': 'warning',
+                                               'active': 'success',
+                                               'completed': 'primary',
+                                               'cancelled': 'danger'
+                                           }}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Charter Action -->
+    <record id="action_nautix_charter" model="ir.actions.act_window">
+        <field name="name">Charters</field>
+        <field name="res_model">nautix.charter</field>
+        <field name="view_mode">list,kanban,form</field>
+    </record>
+
+    <!-- =============================================================== -->
+    <!--                       VOYAGE VIEWS                              -->
+    <!-- =============================================================== -->
+
+    <!-- Voyage List View -->
+    <record id="view_nautix_voyage_tree" model="ir.ui.view">
+        <field name="name">nautix.voyage.tree</field>
+        <field name="model">nautix.voyage</field>
+        <field name="arch" type="xml">
+            <list string="Voyages">
+                <field name="charter_id"/>
+                <field name="vessel_id"/>
+                <field name="departure_port_id"/>
+                <field name="arrival_port_id"/>
+                <field name="etd"/>
+                <field name="eta"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Voyage Form View -->
+    <record id="view_nautix_voyage_form" model="ir.ui.view">
+        <field name="name">nautix.voyage.form</field>
+        <field name="model">nautix.voyage</field>
+        <field name="arch" type="xml">
+            <form string="Voyage">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="charter_id" readonly="1"/>
+                            <field name="vessel_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Departure">
+                            <field name="departure_port_id"/>
+                            <field name="etd"/>
+                            <field name="atd"/>
+                        </group>
+                        <group string="Arrival">
+                            <field name="arrival_port_id"/>
+                            <field name="eta"/>
+                            <field name="ata"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Voyage Action -->
+    <record id="action_nautix_voyage" model="ir.actions.act_window">
+        <field name="name">Voyages</field>
+        <field name="res_model">nautix.voyage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- =============================================================== -->
+    <!--                    INVOICE LINE VIEWS                           -->
+    <!-- =============================================================== -->
+
+    <!-- Invoice Line List View -->
+    <record id="view_nautix_invoice_line_tree" model="ir.ui.view">
+        <field name="name">nautix.invoice.line.tree</field>
+        <field name="model">nautix.invoice.line</field>
+        <field name="arch" type="xml">
+            <list string="Hire Invoice Lines">
+                <field name="charter_id"/>
+                <field name="period_from"/>
+                <field name="period_to"/>
+                <field name="hire_days"/>
+                <field name="hire_rate"/>
+                <field name="total_hire"/>
+                <field name="invoice_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Invoice Line Form View -->
+    <record id="view_nautix_invoice_line_form" model="ir.ui.view">
+        <field name="name">nautix.invoice.line.form</field>
+        <field name="model">nautix.invoice.line</field>
+        <field name="arch" type="xml">
+            <form string="Hire Invoice Line">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="charter_id"/>
+                            <field name="currency_id"/>
+                        </group>
+                        <group>
+                            <field name="invoice_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Period">
+                            <field name="period_from"/>
+                            <field name="period_to"/>
+                        </group>
+                        <group string="Hire Calculation">
+                            <field name="hire_days" readonly="1"/>
+                            <field name="hire_rate" readonly="1"/>
+                            <field name="total_hire" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Invoice Line Action -->
+    <record id="action_nautix_invoice_line" model="ir.actions.act_window">
+        <field name="name">Hire Invoices</field>
+        <field name="res_model">nautix.invoice.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- =============================================================== -->
+    <!--                           MENUS                                 -->
+    <!-- =============================================================== -->
+
+    <!-- Root Menu -->
+    <menuitem id="menu_nautix_root"
+              name="Nautix"
+              sequence="10"
+              web_icon="nautix,static/description/icon.png"/>
+
+    <!-- Fleet -->
+    <menuitem id="menu_nautix_fleet"
+              name="Fleet"
+              parent="menu_nautix_root"
+              sequence="10"/>
+
+    <menuitem id="menu_nautix_vessel"
+              name="Vessels"
+              parent="menu_nautix_fleet"
+              action="action_nautix_vessel"
+              sequence="10"/>
+
+    <!-- Chartering -->
+    <menuitem id="menu_nautix_chartering"
+              name="Chartering"
+              parent="menu_nautix_root"
+              sequence="20"/>
+
+    <menuitem id="menu_nautix_charter"
+              name="Charters"
+              parent="menu_nautix_chartering"
+              action="action_nautix_charter"
+              sequence="10"/>
+
+    <menuitem id="menu_nautix_voyage"
+              name="Voyages"
+              parent="menu_nautix_chartering"
+              action="action_nautix_voyage"
+              sequence="20"/>
+
+    <!-- Invoicing -->
+    <menuitem id="menu_nautix_invoicing"
+              name="Invoicing"
+              parent="menu_nautix_root"
+              sequence="30"/>
+
+    <menuitem id="menu_nautix_invoice_line"
+              name="Hire Invoices"
+              parent="menu_nautix_invoicing"
+              action="action_nautix_invoice_line"
+              sequence="10"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_nautix_config"
+              name="Configuration"
+              parent="menu_nautix_root"
+              sequence="90"/>
+
+    <menuitem id="menu_nautix_port"
+              name="Ports"
+              parent="menu_nautix_config"
+              action="action_nautix_port"
+              sequence="10"/>
+
+    <menuitem id="menu_nautix_cargo_type"
+              name="Cargo Types"
+              parent="menu_nautix_config"
+              action="action_nautix_cargo_type"
+              sequence="20"/>
+
+</odoo>
