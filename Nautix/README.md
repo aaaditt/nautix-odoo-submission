@@ -442,4 +442,36 @@ Nautix/
     │   └── sequences.xml      (charter reference sequence)
     └── report/
         └── charter_party_report.xml (QWeb PDF report template)
+
+---
+
+## Troubleshooting
+
+### 1. RPC_ERROR - 404: Not Found (model `nautix.model`)
+
+**Symptoms:** The Odoo web client fails to load or shows a 404 error when clicking on Nautix menus, referencing a model named `nautix.model`.
+
+**Cause:** This occurs if you have previously installed a version of the module that used the generic name `nautix.model` (which has since been renamed to `nautix.charter`, `nautix.vessel`, etc.). Odoo creates database records (like menu items and window actions) that may still point to the old model name even after the code has been updated.
+
+**Solution:** Force a module upgrade to resynchronize the database records with the current XML definitions and model registry:
+```bash
+python odoo-bin -u nautix -d [your_database_name] -c [your_config_file]
+```
+
+### 2. ModuleNotFoundError: No module named 'babel'
+
+**Symptoms:** The Odoo server fails to start with a traceback ending in `ModuleNotFoundError: No module named 'babel'`.
+
+**Cause:** Odoo 19 requires the `Babel` internationalization library, which may not be present in your local Python environment.
+
+**Solution:** Install all required dependencies from the `requirements.txt` file in the Odoo server root:
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Stale Frontend Assets
+
+**Symptoms:** UI elements don't appear as expected or old menu names persist after an upgrade.
+
+**Solution:** Perform a "Hard Refresh" in your browser (usually `Ctrl + Shift + R` or `Cmd + Shift + R`) to clear the Odoo web asset cache.
 ```
