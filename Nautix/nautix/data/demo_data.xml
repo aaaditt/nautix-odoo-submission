@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================================
+             CONTACTS (res.partner)
+             ============================================================ -->
+
+        <!-- Ship Owners -->
+        <record id="partner_nordic_bulk" model="res.partner">
+            <field name="name">Nordic Bulk Carriers AS</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.no"/>
+        </record>
+
+        <record id="partner_aegean_maritime" model="res.partner">
+            <field name="name">Aegean Maritime Holdings</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.gr"/>
+        </record>
+
+        <record id="partner_pacific_star" model="res.partner">
+            <field name="name">Pacific Star Shipping Ltd</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.jp"/>
+        </record>
+
+        <record id="partner_gulf_tanker" model="res.partner">
+            <field name="name">Gulf Tanker Corporation</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.ae"/>
+        </record>
+
+        <!-- Charterers -->
+        <record id="partner_pacific_trade" model="res.partner">
+            <field name="name">Pacific Trade &amp; Freight Pte Ltd</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.sg"/>
+        </record>
+
+        <record id="partner_atlas_commodities" model="res.partner">
+            <field name="name">Atlas Commodities GmbH</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.de"/>
+        </record>
+
+        <record id="partner_crestline" model="res.partner">
+            <field name="name">Crestline Energy Resources</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.us"/>
+        </record>
+
+        <record id="partner_meridian_grain" model="res.partner">
+            <field name="name">Meridian Grain Traders SA</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.fr"/>
+        </record>
+
+        <!-- ============================================================
+             PORTS (nautix.port)
+             ============================================================ -->
+
+        <record id="port_rotterdam" model="nautix.port">
+            <field name="name">Rotterdam</field>
+            <field name="country_id" ref="base.nl"/>
+            <field name="unlocode">NLRTM</field>
+            <field name="port_type">dry_bulk</field>
+        </record>
+
+        <record id="port_singapore" model="nautix.port">
+            <field name="name">Singapore</field>
+            <field name="country_id" ref="base.sg"/>
+            <field name="unlocode">SGSIN</field>
+            <field name="port_type">container</field>
+        </record>
+
+        <record id="port_hedland" model="nautix.port">
+            <field name="name">Port Hedland</field>
+            <field name="country_id" ref="base.au"/>
+            <field name="unlocode">AUPHE</field>
+            <field name="port_type">dry_bulk</field>
+        </record>
+
+        <record id="port_fujairah" model="nautix.port">
+            <field name="name">Fujairah</field>
+            <field name="country_id" ref="base.ae"/>
+            <field name="unlocode">AEFUJ</field>
+            <field name="port_type">liquid</field>
+        </record>
+
+        <record id="port_shanghai" model="nautix.port">
+            <field name="name">Shanghai</field>
+            <field name="country_id" ref="base.cn"/>
+            <field name="unlocode">CNSHA</field>
+            <field name="port_type">container</field>
+        </record>
+
+        <record id="port_new_orleans" model="nautix.port">
+            <field name="name">New Orleans</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="unlocode">USNOL</field>
+            <field name="port_type">general</field>
+        </record>
+
+        <record id="port_tubarao" model="nautix.port">
+            <field name="name">Tubarao</field>
+            <field name="country_id" ref="base.br"/>
+            <field name="unlocode">BRTUB</field>
+            <field name="port_type">dry_bulk</field>
+        </record>
+
+        <record id="port_ras_tanura" model="nautix.port">
+            <field name="name">Ras Tanura</field>
+            <field name="country_id" ref="base.sa"/>
+            <field name="unlocode">SARNT</field>
+            <field name="port_type">liquid</field>
+        </record>
+
+        <record id="port_antwerp" model="nautix.port">
+            <field name="name">Antwerp</field>
+            <field name="country_id" ref="base.be"/>
+            <field name="unlocode">BEANR</field>
+            <field name="port_type">container</field>
+        </record>
+
+        <record id="port_constanta" model="nautix.port">
+            <field name="name">Constanta</field>
+            <field name="country_id" ref="base.ro"/>
+            <field name="unlocode">ROCND</field>
+            <field name="port_type">dry_bulk</field>
+        </record>
+
+        <!-- ============================================================
+             CARGO TYPES (nautix.cargo.type)
+             ============================================================ -->
+
+        <record id="cargo_coal" model="nautix.cargo.type">
+            <field name="name">Steam Coal</field>
+            <field name="category">dry_bulk</field>
+            <field name="hazardous">False</field>
+        </record>
+
+        <record id="cargo_iron_ore" model="nautix.cargo.type">
+            <field name="name">Iron Ore</field>
+            <field name="category">dry_bulk</field>
+            <field name="hazardous">False</field>
+        </record>
+
+        <record id="cargo_crude_oil" model="nautix.cargo.type">
+            <field name="name">Crude Oil (VLCC)</field>
+            <field name="category">liquid_bulk</field>
+            <field name="hazardous">True</field>
+        </record>
+
+        <record id="cargo_lng" model="nautix.cargo.type">
+            <field name="name">LNG</field>
+            <field name="category">liquid_bulk</field>
+            <field name="hazardous">True</field>
+        </record>
+
+        <record id="cargo_grain" model="nautix.cargo.type">
+            <field name="name">Wheat Grain</field>
+            <field name="category">dry_bulk</field>
+            <field name="hazardous">False</field>
+        </record>
+
+        <record id="cargo_bauxite" model="nautix.cargo.type">
+            <field name="name">Bauxite</field>
+            <field name="category">dry_bulk</field>
+            <field name="hazardous">False</field>
+        </record>
+
+        <record id="cargo_mgo" model="nautix.cargo.type">
+            <field name="name">Diesel Fuel (MGO)</field>
+            <field name="category">liquid_bulk</field>
+            <field name="hazardous">True</field>
+        </record>
+
+        <record id="cargo_steel" model="nautix.cargo.type">
+            <field name="name">Steel Coils</field>
+            <field name="category">break_bulk</field>
+            <field name="hazardous">False</field>
+        </record>
+
+        <!-- ============================================================
+             VESSELS (nautix.vessel)
+             ============================================================ -->
+
+        <record id="vessel_nordvik" model="nautix.vessel">
+            <field name="name">MV Nordvik</field>
+            <field name="imo_number">IMO 9876543</field>
+            <field name="vessel_type">bulk_carrier</field>
+            <field name="flag_state">Norway</field>
+            <field name="year_built">2018</field>
+            <field name="dwt">82500</field>
+            <field name="grt">44800</field>
+            <field name="loa">229</field>
+            <field name="beam">32</field>
+            <field name="draft">14.5</field>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="status">available</field>
+            <field name="classification_society">DNV</field>
+            <field name="next_drydock">2026-08-15</field>
+        </record>
+
+        <record id="vessel_aegean_star" model="nautix.vessel">
+            <field name="name">MV Aegean Star</field>
+            <field name="imo_number">IMO 9234567</field>
+            <field name="vessel_type">tanker</field>
+            <field name="flag_state">Greece</field>
+            <field name="year_built">2016</field>
+            <field name="dwt">115000</field>
+            <field name="grt">62400</field>
+            <field name="loa">250</field>
+            <field name="beam">44</field>
+            <field name="draft">15.2</field>
+            <field name="owner_id" ref="partner_aegean_maritime"/>
+            <field name="status">on_charter</field>
+            <field name="classification_society">Lloyd's</field>
+            <field name="next_drydock">2026-03-01</field>
+        </record>
+
+        <record id="vessel_pacific_crown" model="nautix.vessel">
+            <field name="name">MV Pacific Crown</field>
+            <field name="imo_number">IMO 9345678</field>
+            <field name="vessel_type">container</field>
+            <field name="flag_state">Japan</field>
+            <field name="year_built">2020</field>
+            <field name="dwt">68000</field>
+            <field name="grt">51200</field>
+            <field name="loa">294</field>
+            <field name="beam">32</field>
+            <field name="draft">13.0</field>
+            <field name="owner_id" ref="partner_pacific_star"/>
+            <field name="status">available</field>
+            <field name="classification_society">ClassNK</field>
+            <field name="next_drydock">2026-11-10</field>
+        </record>
+
+        <record id="vessel_gulf_falcon" model="nautix.vessel">
+            <field name="name">MV Gulf Falcon</field>
+            <field name="imo_number">IMO 9456789</field>
+            <field name="vessel_type">tanker</field>
+            <field name="flag_state">UAE</field>
+            <field name="year_built">2019</field>
+            <field name="dwt">300000</field>
+            <field name="grt">161000</field>
+            <field name="loa">330</field>
+            <field name="beam">60</field>
+            <field name="draft">22.0</field>
+            <field name="owner_id" ref="partner_gulf_tanker"/>
+            <field name="status">available</field>
+            <field name="classification_society">ABS</field>
+            <field name="next_drydock">2026-06-20</field>
+        </record>
+
+        <record id="vessel_constanta_bridge" model="nautix.vessel">
+            <field name="name">MV Constanta Bridge</field>
+            <field name="imo_number">IMO 9567890</field>
+            <field name="vessel_type">bulk_carrier</field>
+            <field name="flag_state">Romania</field>
+            <field name="year_built">2015</field>
+            <field name="dwt">56000</field>
+            <field name="grt">31200</field>
+            <field name="loa">190</field>
+            <field name="beam">32</field>
+            <field name="draft">12.8</field>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="status">under_repair</field>
+            <field name="classification_society">BV</field>
+            <field name="next_drydock">2026-01-05</field>
+        </record>
+
+        <record id="vessel_hellas_spirit" model="nautix.vessel">
+            <field name="name">MV Hellas Spirit</field>
+            <field name="imo_number">IMO 9678901</field>
+            <field name="vessel_type">lng</field>
+            <field name="flag_state">Greece</field>
+            <field name="year_built">2021</field>
+            <field name="dwt">72000</field>
+            <field name="grt">95000</field>
+            <field name="loa">285</field>
+            <field name="beam">46</field>
+            <field name="draft">12.3</field>
+            <field name="owner_id" ref="partner_aegean_maritime"/>
+            <field name="status">available</field>
+            <field name="classification_society">DNV</field>
+            <field name="next_drydock">2027-09-30</field>
+        </record>
+
+        <!-- ============================================================
+             CHARTERS (nautix.charter)
+             ============================================================ -->
+
+        <record id="charter_001" model="nautix.charter">
+            <field name="name">CHT/2025/0001</field>
+            <field name="vessel_id" ref="vessel_nordvik"/>
+            <field name="charterer_id" ref="partner_pacific_trade"/>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="charter_type">time_charter</field>
+            <field name="state">active</field>
+            <field name="date_start">2025-05-01</field>
+            <field name="date_end">2025-07-31</field>
+            <field name="hire_rate">18500</field>
+            <field name="lump_sum_freight">0</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="laycan_from">2025-05-10</field>
+            <field name="laycan_to">2025-05-15</field>
+            <field name="load_port_ids" eval="[(4, ref('port_rotterdam'))]"/>
+            <field name="discharge_port_ids" eval="[(4, ref('port_singapore'))]"/>
+            <field name="cargo_id" ref="cargo_coal"/>
+            <field name="cargo_quantity">75000</field>
+            <field name="notes">BIMCO SUPPLYTIME 2017 terms apply. Owner warrants vessel is fitted with grab cranes for self-discharge operations at discharge port.</field>
+        </record>
+
+        <record id="charter_002" model="nautix.charter">
+            <field name="name">CHT/2025/0002</field>
+            <field name="vessel_id" ref="vessel_aegean_star"/>
+            <field name="charterer_id" ref="partner_crestline"/>
+            <field name="owner_id" ref="partner_aegean_maritime"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">fixed</field>
+            <field name="date_start">2025-05-15</field>
+            <field name="date_end">2025-06-30</field>
+            <field name="hire_rate">0</field>
+            <field name="lump_sum_freight">4200000</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="laycan_from">2025-05-18</field>
+            <field name="laycan_to">2025-05-22</field>
+            <field name="load_port_ids" eval="[(4, ref('port_ras_tanura'))]"/>
+            <field name="discharge_port_ids" eval="[(4, ref('port_new_orleans'))]"/>
+            <field name="cargo_id" ref="cargo_crude_oil"/>
+            <field name="cargo_quantity">110000</field>
+            <field name="notes">Vessel to maintain full ISM compliance throughout voyage. All taxes at discharge port for charterers account.</field>
+        </record>
+
+        <record id="charter_003" model="nautix.charter">
+            <field name="name">CHT/2025/0003</field>
+            <field name="vessel_id" ref="vessel_pacific_crown"/>
+            <field name="charterer_id" ref="partner_atlas_commodities"/>
+            <field name="owner_id" ref="partner_pacific_star"/>
+            <field name="charter_type">time_charter</field>
+            <field name="state">negotiation</field>
+            <field name="date_start">2025-06-01</field>
+            <field name="date_end">2025-08-31</field>
+            <field name="hire_rate">22000</field>
+            <field name="lump_sum_freight">0</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="laycan_from">2025-06-05</field>
+            <field name="laycan_to">2025-06-10</field>
+            <field name="load_port_ids" eval="[(4, ref('port_antwerp'))]"/>
+            <field name="discharge_port_ids" eval="[(4, ref('port_shanghai'))]"/>
+            <field name="cargo_id" ref="cargo_steel"/>
+            <field name="cargo_quantity">48000</field>
+            <field name="notes">Subject to owners approval of cargo stowage plan. Charterers to provide stevedores at both ends.</field>
+        </record>
+
+        <record id="charter_004" model="nautix.charter">
+            <field name="name">CHT/2025/0004</field>
+            <field name="vessel_id" ref="vessel_gulf_falcon"/>
+            <field name="charterer_id" ref="partner_crestline"/>
+            <field name="owner_id" ref="partner_gulf_tanker"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">draft</field>
+            <field name="date_start">2025-07-01</field>
+            <field name="date_end">2025-08-15</field>
+            <field name="hire_rate">0</field>
+            <field name="lump_sum_freight">7800000</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="laycan_from">2025-07-05</field>
+            <field name="laycan_to">2025-07-08</field>
+            <field name="load_port_ids" eval="[(4, ref('port_fujairah'))]"/>
+            <field name="discharge_port_ids" eval="[(4, ref('port_shanghai'))]"/>
+            <field name="cargo_id" ref="cargo_mgo"/>
+            <field name="cargo_quantity">280000</field>
+            <field name="notes">Preliminary fixture subject to vessel inspection at Fujairah prior to loading. P&amp;I Club approval required.</field>
+        </record>
+
+        <record id="charter_005" model="nautix.charter">
+            <field name="name">CHT/2025/0005</field>
+            <field name="vessel_id" ref="vessel_hellas_spirit"/>
+            <field name="charterer_id" ref="partner_atlas_commodities"/>
+            <field name="owner_id" ref="partner_aegean_maritime"/>
+            <field name="charter_type">time_charter</field>
+            <field name="state">completed</field>
+            <field name="date_start">2025-02-01</field>
+            <field name="date_end">2025-04-30</field>
+            <field name="hire_rate">31500</field>
+            <field name="lump_sum_freight">0</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="laycan_from">2025-02-05</field>
+            <field name="laycan_to">2025-02-08</field>
+            <field name="load_port_ids" eval="[(4, ref('port_constanta'))]"/>
+            <field name="discharge_port_ids" eval="[(4, ref('port_singapore'))]"/>
+            <field name="cargo_id" ref="cargo_lng"/>
+            <field name="cargo_quantity">68000</field>
+            <field name="notes">SHELLTIME 4 terms incorporated. Owners to supply SIGTTO-certified crew for LNG handling throughout voyage.</field>
+        </record>
+
+        <record id="charter_006" model="nautix.charter">
+            <field name="name">CHT/2025/0006</field>
+            <field name="vessel_id" ref="vessel_nordvik"/>
+            <field name="charterer_id" ref="partner_meridian_grain"/>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">cancelled</field>
+            <field name="date_start">2025-03-10</field>
+            <field name="date_end">2025-04-20</field>
+            <field name="hire_rate">0</field>
+            <field name="lump_sum_freight">1950000</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="laycan_from">2025-03-15</field>
+            <field name="laycan_to">2025-03-18</field>
+            <field name="load_port_ids" eval="[(4, ref('port_tubarao'))]"/>
+            <field name="discharge_port_ids" eval="[(4, ref('port_rotterdam'))]"/>
+            <field name="cargo_id" ref="cargo_grain"/>
+            <field name="cargo_quantity">52000</field>
+            <field name="notes">Cancelled due to force majeure — port congestion at Tubarao. All costs to be settled per Gencon 2022 clause 18.</field>
+        </record>
+
+        <!-- ============================================================
+             VOYAGES (nautix.voyage)
+             ============================================================ -->
+
+        <record id="voyage_001" model="nautix.voyage">
+            <field name="charter_id" ref="charter_001"/>
+            <field name="departure_port_id" ref="port_rotterdam"/>
+            <field name="arrival_port_id" ref="port_singapore"/>
+            <field name="etd">2025-05-01 06:00:00</field>
+            <field name="eta">2025-05-22 14:00:00</field>
+            <field name="atd">2025-05-01 07:30:00</field>
+            <field name="status">underway</field>
+        </record>
+
+        <record id="voyage_002" model="nautix.voyage">
+            <field name="charter_id" ref="charter_002"/>
+            <field name="departure_port_id" ref="port_ras_tanura"/>
+            <field name="arrival_port_id" ref="port_new_orleans"/>
+            <field name="etd">2025-05-20 08:00:00</field>
+            <field name="eta">2025-06-10 18:00:00</field>
+            <field name="status">planned</field>
+        </record>
+
+        <record id="voyage_005a" model="nautix.voyage">
+            <field name="charter_id" ref="charter_005"/>
+            <field name="departure_port_id" ref="port_constanta"/>
+            <field name="arrival_port_id" ref="port_singapore"/>
+            <field name="etd">2025-02-07 09:00:00</field>
+            <field name="eta">2025-03-02 16:00:00</field>
+            <field name="atd">2025-02-07 09:45:00</field>
+            <field name="ata">2025-03-02 17:20:00</field>
+            <field name="status">completed</field>
+        </record>
+
+        <!-- ============================================================
+             INVOICE LINES (nautix.invoice.line)
+             ============================================================ -->
+
+        <record id="inv_001_p1" model="nautix.invoice.line">
+            <field name="charter_id" ref="charter_001"/>
+            <field name="period_from">2025-05-01</field>
+            <field name="period_to">2025-05-15</field>
+        </record>
+
+        <record id="inv_001_p2" model="nautix.invoice.line">
+            <field name="charter_id" ref="charter_001"/>
+            <field name="period_from">2025-05-16</field>
+            <field name="period_to">2025-05-31</field>
+        </record>
+
+        <record id="inv_005_p1" model="nautix.invoice.line">
+            <field name="charter_id" ref="charter_005"/>
+            <field name="period_from">2025-02-01</field>
+            <field name="period_to">2025-02-28</field>
+        </record>
+
+        <record id="inv_005_p2" model="nautix.invoice.line">
+            <field name="charter_id" ref="charter_005"/>
+            <field name="period_from">2025-03-01</field>
+            <field name="period_to">2025-03-31</field>
+        </record>
+
+        <record id="inv_005_p3" model="nautix.invoice.line">
+            <field name="charter_id" ref="charter_005"/>
+            <field name="period_from">2025-04-01</field>
+            <field name="period_to">2025-04-30</field>
+        </record>
+
+        <!-- ============================================================
+             SEQUENCE UPDATE
+             ============================================================ -->
+
+        <record id="nautix.seq_nautix_charter" model="ir.sequence">
+            <field name="number_next">7</field>
+        </record>
+
+    </data>
+</odoo>

@@ -11,5 +11,6 @@
         "data/sequences.xml",
         "report/charter_party_report.xml",
         "views/views.xml",
+        "data/demo_data.xml",
     ]
 }
