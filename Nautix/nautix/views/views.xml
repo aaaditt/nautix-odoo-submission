@@ -61,12 +61,24 @@
                         </group>
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
-                </div>
+                <chatter/>
             </form>
+        </field>
+    </record>
+
+    <!-- Vessel Search View -->
+    <record id="view_nautix_vessel_search" model="ir.ui.view">
+        <field name="name">nautix.vessel.search</field>
+        <field name="model">nautix.vessel</field>
+        <field name="arch" type="xml">
+            <search string="Search Vessels">
+                <field name="name"/>
+                <field name="imo_number"/>
+                <searchpanel>
+                    <field name="status" icon="fa-tasks" enable_counters="1"/>
+                    <field name="vessel_type" icon="fa-ship" enable_counters="1"/>
+                </searchpanel>
+            </search>
         </field>
     </record>
 
@@ -311,12 +323,25 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
-                </div>
+                <chatter/>
             </form>
+        </field>
+    </record>
+
+    <!-- Charter Search View -->
+    <record id="view_nautix_charter_search" model="ir.ui.view">
+        <field name="name">nautix.charter.search</field>
+        <field name="model">nautix.charter</field>
+        <field name="arch" type="xml">
+            <search string="Search Charters">
+                <field name="name"/>
+                <field name="vessel_id"/>
+                <field name="charterer_id"/>
+                <searchpanel>
+                    <field name="state" icon="fa-info-circle" enable_counters="1"/>
+                    <field name="charter_type" icon="fa-ship" enable_counters="1"/>
+                </searchpanel>
+            </search>
         </field>
     </record>
 
@@ -332,7 +357,7 @@
                 <field name="hire_rate"/>
                 <field name="state"/>
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div t-attf-class="oe_kanban_card oe_kanban_global_click">
                             <div class="oe_kanban_details">
                                 <strong class="o_kanban_record_title">
