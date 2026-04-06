@@ -1,3 +1,4 @@
+# this model stores physical specifications and availability for ships
 from odoo import models, fields
 
 

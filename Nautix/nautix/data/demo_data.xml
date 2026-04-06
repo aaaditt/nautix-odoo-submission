@@ -206,6 +206,20 @@
             <field name="port_type">general</field>
         </record>
 
+        <record id="port_dubai" model="nautix.port">
+            <field name="name">Dubai</field>
+            <field name="country_id" ref="base.ae"/>
+            <field name="unlocode">AEDXB</field>
+            <field name="port_type">liquid</field>
+        </record>
+
+        <record id="port_london" model="nautix.port">
+            <field name="name">London</field>
+            <field name="country_id" ref="base.uk"/>
+            <field name="unlocode">GBLON</field>
+            <field name="port_type">general</field>
+        </record>
+
         <!-- ============================================================
              CARGO TYPES (nautix.cargo.type)
              ============================================================ -->

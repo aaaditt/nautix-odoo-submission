@@ -1,3 +1,4 @@
+# this is the core chartering contract model
 from odoo import models, fields, api
 
 
@@ -6,6 +7,7 @@ class NautixCharter(models.Model):
     _description = 'Charter'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    # below are the main contract details
     name = fields.Char(
         string='Reference',
         readonly=True,
@@ -76,6 +78,7 @@ class NautixCharter(models.Model):
                 ) or '/'
         return super().create(vals_list)
 
+    # below are the state machine methods for charter status
     # ---- State machine ----
     def action_to_negotiation(self):
         for rec in self:

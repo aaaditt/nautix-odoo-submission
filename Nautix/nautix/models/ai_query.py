@@ -22,7 +22,9 @@ class NautixAIQuery(models.Model):
         from datetime import datetime, timedelta
 
         self.ensure_one()
-        prompt = self.prompt.lower()
+        # Use read to avoid potential Odoo cache issues with unhashable types in some contexts
+        res = self.read(['prompt'])
+        prompt = (res[0].get('prompt') or "").lower()
 
         # 1. ENHANCED EXTRACTION
         quantity = 0
@@ -69,17 +71,20 @@ class NautixAIQuery(models.Model):
             score = 0
             reason_tags = []
             
-            # -- Hard Filter: Capacity --
-            if vessel.dwt < quantity * 0.8: # Allow slightly smaller for split suggestions later
+            # -- Safety check on DWT and Capacity --
+            vessel_dwt = vessel.dwt or 0.0
+            if vessel_dwt < (quantity * 0.8): # Allow slightly smaller for split suggestions later
                 continue
             
             # -- Base Score: Capacity Fit --
-            fit_ratio = quantity / vessel.dwt if vessel.dwt > 0 else 0
-            score += fit_ratio * 40 # Up to 40 points for capacity fit
+            fit_ratio = quantity / vessel_dwt if vessel_dwt > 0 else 0
+            score += min(fit_ratio * 40, 40) # Up to 40 points for capacity fit
 
             # -- Bonus: Vessel Type Match --
             if detected_vessel_type:
-                if vessel.vessel_type == detected_vessel_type:
+                # Odoo selection values are technical names (strings)
+                v_type = vessel.vessel_type or ""
+                if v_type == detected_vessel_type:
                     score += 50
                     reason_tags.append("Optimal vessel type")
                 else:
@@ -91,7 +96,6 @@ class NautixAIQuery(models.Model):
                 score += 10
                 reason_tags.append("Ready now")
             else:
-                # Check Voyager ETA if available (simplified check)
                 score -= 10
                 reason_tags.append("In transit - check ETA")
 
@@ -109,8 +113,8 @@ class NautixAIQuery(models.Model):
         # 3. SPLIT-SHIP CHECK
         if not any(m['score'] > 80 for m in matches) and quantity > 0:
             # If no single ship is perfect, suggest the two largest ships
-            top_two = sorted(vessels, key=lambda x: x.dwt, reverse=True)[:2]
-            if len(top_two) == 2 and (top_two[0].dwt + top_two[1].dwt) >= quantity:
+            top_two = sorted(vessels, key=lambda x: (x.dwt or 0.0), reverse=True)[:2]
+            if len(top_two) == 2 and ((top_two[0].dwt or 0.0) + (top_two[1].dwt or 0.0)) >= quantity:
                 matches.append({
                     'id': False, # Complex match
                     'name': f"{top_two[0].name} + {top_two[1].name}",

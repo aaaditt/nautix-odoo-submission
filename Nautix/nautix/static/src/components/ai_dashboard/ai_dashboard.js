@@ -1,3 +1,4 @@
+// # below are the ai chatbot frontend instructions and state management
 /** @odoo-module **/
 
 import { Component, useState, useRef, onWillStart } from "@odoo/owl";
@@ -6,16 +7,17 @@ import { useService } from "@web/core/utils/hooks";
 
 export class AIDashboard extends Component {
     setup() {
-        this.rpc = useService("rpc");
+        this.orm = useService("orm");
         this.action = useService("action");
         this.queryInput = useRef("query-input");
         
         this.state = useState({
             loading: false,
             matches: [],
+            metadata: {},
             stats: {
-                total_vessels: 12,
-                available_vessels: 8,
+                total_vessels: 0,
+                available_vessels: 0,
                 readyness: 98,
             }
         });
@@ -26,21 +28,13 @@ export class AIDashboard extends Component {
     }
 
     async _fetchStats() {
-        const stats = await this.rpc("/web/dataset/call_kw/nautix.vessel/search_count", {
-            model: "nautix.vessel",
-            method: "search_count",
-            args: [[['status', '=', 'available']]],
-            kwargs: {},
-        });
-        this.state.stats.available_vessels = stats;
+        const availableCount = await this.orm.searchCount("nautix.vessel", [
+            ['status', '=', 'available']
+        ]);
+        this.state.stats.available_vessels = availableCount;
         
-        const total = await this.rpc("/web/dataset/call_kw/nautix.vessel/search_count", {
-            model: "nautix.vessel",
-            method: "search_count",
-            args: [[]],
-            kwargs: {},
-        });
-        this.state.stats.total_vessels = total;
+        const totalCount = await this.orm.searchCount("nautix.vessel", []);
+        this.state.stats.total_vessels = totalCount;
     }
 
     async _onAnalyze() {
@@ -52,28 +46,15 @@ export class AIDashboard extends Component {
 
         try {
             // 1. Create the AI Query record
-            const queryId = await this.rpc("/web/dataset/call_kw/nautix.ai.query/create", {
-                model: "nautix.ai.query",
-                method: "create",
-                args: [{ prompt }],
-                kwargs: {},
-            });
+            const result = await this.orm.create("nautix.ai.query", [{ prompt }]);
+            const queryId = Array.isArray(result) ? result[0] : result;
 
-            // 2. Call the analyze method
-            await this.rpc(`/web/dataset/call_kw/nautix.ai.query/action_analyze`, {
-                model: "nautix.ai.query",
-                method: "action_analyze",
-                args: [[queryId]],
-                kwargs: {},
-            });
+            // 2. Call the analyze method (pass as recordset IDs)
+            await this.orm.call("nautix.ai.query", "action_analyze", [queryId]);
 
-            // 3. Get the results
-            const [queryData] = await this.rpc("/web/dataset/call_kw/nautix.ai.query/read", {
-                model: "nautix.ai.query",
-                method: "read",
-                args: [[queryId]],
-                kwargs: { fields: ['results_json'] },
-            });
+            // 3. Get the results (pass list of IDs)
+            const queryDataList = await this.orm.read("nautix.ai.query", [queryId], ['results_json']);
+            const queryData = queryDataList[0];
 
             if (queryData && queryData.results_json) {
                 const data = JSON.parse(queryData.results_json);
