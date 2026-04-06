@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nautix.AIDashboard" owl="1">
+        <div class="nautix-ai-dashboard p-4 h-100 overflow-auto bg-light">
+            <!-- Header Command Bar -->
+            <div class="command-bar-wrapper mb-5 text-center">
+                <h1 class="display-4 fw-bold text-primary mb-4 p-3">Nautix AI Logistics</h1>
+                <div class="input-group input-group-lg mx-auto shadow-sm" style="max-width: 800px;">
+                    <span class="input-group-text bg-white border-0">
+                        <i class="fa fa-braille text-info animated-pulse"/>
+                    </span>
+                    <input type="text" 
+                           class="form-control border-0 glass-input" 
+                           placeholder="Ask me anything... e.g., 'Find a ship for 50k fuel from Dubai to London'"
+                           t-on-keydown="_onKeydown"
+                           t-ref="query-input"/>
+                    <button class="btn btn-primary px-5" 
+                            t-on-click="_onAnalyze"
+                            t-att-disabled="state.loading">
+                        <t t-if="!state.loading">Scan Fleet</t>
+                        <t t-else=""><i class="fa fa-spinner fa-spin"/> Analyzing...</t>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats HUD -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm text-center p-3 h-100 glass-card">
+                        <div class="text-muted small text-uppercase fw-bold mb-1">Total Fleet</div>
+                        <div class="h2 fw-bold text-primary"><t t-esc="state.stats.total_vessels || 0"/></div>
+                        <div class="progress mt-2" style="height: 4px;">
+                            <div class="progress-bar bg-primary" style="width: 100%"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm text-center p-3 h-100 glass-card">
+                        <div class="text-muted small text-uppercase fw-bold mb-1">Available Vessels</div>
+                        <div class="h2 fw-bold text-success"><t t-esc="state.stats.available_vessels || 0"/></div>
+                        <div class="progress mt-2" style="height: 4px;">
+                            <div class="progress-bar bg-success" style="width: 75%"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm text-center p-3 h-100 glass-card">
+                        <div class="text-muted small text-uppercase fw-bold mb-1">Operational Readyness</div>
+                        <div class="h2 fw-bold text-info"><t t-esc="state.stats.readyness || 98"/>%</div>
+                        <div class="progress mt-2" style="height: 4px;">
+                            <div class="progress-bar bg-info" style="width: 98%"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm text-center p-3 h-100 glass-card">
+                        <div class="text-muted small text-uppercase fw-bold mb-1">Active AI Models</div>
+                        <div class="h2 fw-bold text-warning">2.4</div>
+                        <div class="progress mt-2" style="height: 4px;">
+                            <div class="progress-bar bg-warning" style="width: 60%"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendation Results Grid -->
+            <div t-if="state.matches.length" class="results-section">
+                <h3 class="mb-4 text-secondary fw-bold">Top Fleet Matches</h3>
+                <div class="row g-4">
+                    <t t-foreach="state.matches" t-as="match" t-key="match.id">
+                        <div class="col-md-4">
+                            <div t-attf-class="card border-0 shadow-lg vessel-card h-100 overflow-hidden {{ match.is_split ? 'border-start border-4 border-warning' : '' }}">
+                                <div t-attf-class="vessel-card-header p-3 text-white d-flex justify-content-between align-items-center {{ match.is_split ? 'bg-warning text-dark' : '' }}">
+                                     <div class="fw-bold">
+                                         <i t-if="match.is_split" class="fa fa-users me-1"/>
+                                         <t t-esc="match.name"/>
+                                     </div>
+                                     <span t-attf-class="badge rounded-pill shadow-sm {{ match.is_split ? 'bg-dark text-white' : 'bg-white text-primary' }}">
+                                         <t t-esc="match.score"/>% Match
+                                     </span>
+                                 </div>
+                                 <div class="card-body p-4">
+                                     <div class="mb-3">
+                                         <span class="text-muted small">Type/Squad:</span>
+                                         <div class="fw-bold text-uppercase"><t t-esc="match.vessel_type"/></div>
+                                     </div>
+                                     <div class="mb-3">
+                                         <span class="text-muted small">Total Capacity:</span>
+                                         <div class="fw-bold"><t t-esc="match.dwt.toLocaleString()"/> tons</div>
+                                     </div>
+                                     <div class="mb-4">
+                                         <span class="text-muted small">AI Highlights:</span>
+                                         <div t-attf-class="p-2 rounded small {{ match.is_split ? 'bg-warning-subtle text-dark border' : 'bg-light text-primary' }}">
+                                             <i class="fa fa-info-circle me-1"/> <t t-esc="match.reason"/>
+                                         </div>
+                                     </div>
+                                     <button t-attf-class="btn w-100 rounded-pill btn-sm fw-bold mt-auto {{ match.is_split ? 'btn-warning' : 'btn-outline-primary' }}" 
+                                             t-on-click="() => this._onCreateCharter(match)">
+                                         Confirm &amp; Create Charter
+                                     </button>
+                                 </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            
+            <!-- Empty State / Suggestions -->
+            <div t-else="" class="text-center py-5">
+                <div class="opacity-50 mb-5">
+                    <i class="fa fa-anchor fa-4x mb-3 text-muted"/>
+                    <p class="fs-4">Waiting for your logistics query to scan the fleet...</p>
+                </div>
+                
+                <div class="mx-auto" style="max-width: 600px;">
+                    <h5 class="text-muted mb-4">Try one of these commands:</h5>
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                        <span class="badge bg-white text-primary border p-2 cursor-pointer" 
+                              t-on-click="() => { this.queryInput.el.value = 'Need a tanker for 50k fuel from Dubai to London'; this._onAnalyze(); }">
+                              "50k fuel from Dubai to London"
+                        </span>
+                        <span class="badge bg-white text-primary border p-2 cursor-pointer"
+                              t-on-click="() => { this.queryInput.el.value = 'Find a ship for 120k crude oil'; this._onAnalyze(); }">
+                              "120k crude oil"
+                        </span>
+                        <span class="badge bg-white text-primary border p-2 cursor-pointer"
+                              t-on-click="() => { this.queryInput.el.value = 'Move grain to Singapore'; this._onAnalyze(); }">
+                              "Move grain to Singapore"
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

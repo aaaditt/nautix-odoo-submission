@@ -523,11 +523,23 @@
     <!--                           MENUS                                 -->
     <!-- =============================================================== -->
 
-    <!-- Root Menu -->
     <menuitem id="menu_nautix_root"
               name="Nautix"
               sequence="10"
               web_icon="nautix,static/description/icon.png"/>
+
+    <!-- AI Dashboard Action -->
+    <record id="action_nautix_ai_dashboard" model="ir.actions.client">
+        <field name="name">Nautix AI Command Center</field>
+        <field name="tag">nautix_ai_dashboard</field>
+    </record>
+
+    <!-- AI Assistant -->
+    <menuitem id="menu_nautix_ai"
+              name="AI Assistant"
+              parent="menu_nautix_root"
+              action="action_nautix_ai_dashboard"
+              sequence="1"/>
 
     <!-- Fleet -->
     <menuitem id="menu_nautix_fleet"

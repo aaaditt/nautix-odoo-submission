@@ -5,3 +5,4 @@ access_nautix_cargo_type,access_nautix_cargo_type,model_nautix_cargo_type,base.g
 access_nautix_charter,access_nautix_charter,model_nautix_charter,base.group_user,1,1,1,1
 access_nautix_voyage,access_nautix_voyage,model_nautix_voyage,base.group_user,1,1,1,1
 access_nautix_invoice_line,access_nautix_invoice_line,model_nautix_invoice_line,base.group_user,1,1,1,1
+access_nautix_ai_query,access_nautix_ai_query,model_nautix_ai_query,base.group_user,1,1,1,1

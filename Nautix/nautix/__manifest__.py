@@ -12,5 +12,12 @@
         "report/charter_party_report.xml",
         "views/views.xml",
         "data/demo_data.xml",
-    ]
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "nautix/static/src/components/ai_dashboard/ai_dashboard.xml",
+            "nautix/static/src/components/ai_dashboard/ai_dashboard.js",
+            "nautix/static/src/components/ai_dashboard/ai_dashboard.scss",
+        ]
+    }
 }
