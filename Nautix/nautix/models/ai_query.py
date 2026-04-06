@@ -1,3 +1,4 @@
+# this is the backend logic for processing AI logistics recommendations
 from odoo import models, fields, api
 
 class NautixAIQuery(models.Model):

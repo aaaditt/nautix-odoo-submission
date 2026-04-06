@@ -6,6 +6,7 @@
     <!--                        VESSEL VIEWS                             -->
     <!-- =============================================================== -->
 
+    <!-- # these are the list and form views for managing the vessel fleet -->
     <!-- Vessel List View -->
     <record id="view_nautix_vessel_tree" model="ir.ui.view">
         <field name="name">nautix.vessel.tree</field>
@@ -186,6 +187,7 @@
     <!--                       CHARTER VIEWS                             -->
     <!-- =============================================================== -->
 
+    <!-- # these views manage the core chartering contracts and lifecycle -->
     <!-- Charter List View -->
     <record id="view_nautix_charter_tree" model="ir.ui.view">
         <field name="name">nautix.charter.tree</field>
@@ -529,6 +531,7 @@
               sequence="10"
               web_icon="nautix,static/description/icon.png"/>
 
+    <!-- # this is the AI Dashboard client action -->
     <!-- AI Dashboard Action -->
     <record id="action_nautix_ai_dashboard" model="ir.actions.client">
         <field name="name">Nautix AI Command Center</field>

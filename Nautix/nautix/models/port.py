@@ -1,3 +1,4 @@
+# this model tracks cargo loading and discharge locations globally
 from odoo import models, fields
 
 
