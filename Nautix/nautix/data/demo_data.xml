@@ -31,6 +31,30 @@
             <field name="country_id" ref="base.ae"/>
         </record>
 
+        <record id="partner_mol" model="res.partner">
+            <field name="name">Mitsui O.S.K. Lines (MOL)</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.jp"/>
+        </record>
+
+        <record id="partner_maersk" model="res.partner">
+            <field name="name">Maersk Line</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.dk"/>
+        </record>
+
+        <record id="partner_msc" model="res.partner">
+            <field name="name">Mediterranean Shipping Company (MSC)</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.ch"/>
+        </record>
+
+        <record id="partner_cosco" model="res.partner">
+            <field name="name">COSCO Shipping</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.cn"/>
+        </record>
+
         <!-- Charterers -->
         <record id="partner_pacific_trade" model="res.partner">
             <field name="name">Pacific Trade &amp; Freight Pte Ltd</field>
@@ -54,6 +78,30 @@
             <field name="name">Meridian Grain Traders SA</field>
             <field name="is_company">True</field>
             <field name="country_id" ref="base.fr"/>
+        </record>
+
+        <record id="partner_bhp" model="res.partner">
+            <field name="name">BHP Group</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.au"/>
+        </record>
+
+        <record id="partner_rio_tinto" model="res.partner">
+            <field name="name">Rio Tinto</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.au"/>
+        </record>
+
+        <record id="partner_vale" model="res.partner">
+            <field name="name">Vale S.A.</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.br"/>
+        </record>
+
+        <record id="partner_glencore" model="res.partner">
+            <field name="name">Glencore PLC</field>
+            <field name="is_company">True</field>
+            <field name="country_id" ref="base.ch"/>
         </record>
 
         <!-- ============================================================
@@ -130,6 +178,34 @@
             <field name="port_type">dry_bulk</field>
         </record>
 
+        <record id="port_jebel_ali" model="nautix.port">
+            <field name="name">Jebel Ali</field>
+            <field name="country_id" ref="base.ae"/>
+            <field name="unlocode">AEJEA</field>
+            <field name="port_type">container</field>
+        </record>
+
+        <record id="port_hamburg" model="nautix.port">
+            <field name="name">Hamburg</field>
+            <field name="country_id" ref="base.de"/>
+            <field name="unlocode">DEHAM</field>
+            <field name="port_type">container</field>
+        </record>
+
+        <record id="port_busan" model="nautix.port">
+            <field name="name">Busan</field>
+            <field name="country_id" ref="base.kr"/>
+            <field name="unlocode">KRPUS</field>
+            <field name="port_type">container</field>
+        </record>
+
+        <record id="port_santos" model="nautix.port">
+            <field name="name">Santos</field>
+            <field name="country_id" ref="base.br"/>
+            <field name="unlocode">BRSSZ</field>
+            <field name="port_type">general</field>
+        </record>
+
         <!-- ============================================================
              CARGO TYPES (nautix.cargo.type)
              ============================================================ -->
@@ -180,6 +256,24 @@
             <field name="name">Steel Coils</field>
             <field name="category">break_bulk</field>
             <field name="hazardous">False</field>
+        </record>
+
+        <record id="cargo_soybean" model="nautix.cargo.type">
+            <field name="name">Soybeans</field>
+            <field name="category">dry_bulk</field>
+            <field name="hazardous">False</field>
+        </record>
+
+        <record id="cargo_corn" model="nautix.cargo.type">
+            <field name="name">Yellow Corn</field>
+            <field name="category">dry_bulk</field>
+            <field name="hazardous">False</field>
+        </record>
+
+        <record id="cargo_fuel_oil" model="nautix.cargo.type">
+            <field name="name">Heavy Fuel Oil (HFO)</field>
+            <field name="category">liquid_bulk</field>
+            <field name="hazardous">True</field>
         </record>
 
         <!-- ============================================================
@@ -286,6 +380,312 @@
             <field name="status">available</field>
             <field name="classification_society">DNV</field>
             <field name="next_drydock">2027-09-30</field>
+        </record>
+
+        <!-- New Vessels (20 more) -->
+        <record id="vessel_mol_triumph" model="nautix.vessel">
+            <field name="name">MOL Triumph</field>
+            <field name="imo_number">IMO 9769271</field>
+            <field name="vessel_type">container</field>
+            <field name="flag_state">Marshall Islands</field>
+            <field name="year_built">2017</field>
+            <field name="dwt">192672</field>
+            <field name="grt">210678</field>
+            <field name="loa">400</field>
+            <field name="beam">58.8</field>
+            <field name="draft">16.0</field>
+            <field name="owner_id" ref="partner_mol"/>
+            <field name="status">available</field>
+            <field name="classification_society">ClassNK</field>
+        </record>
+
+        <record id="vessel_maersk_mcallister" model="nautix.vessel">
+            <field name="name">Maersk Mc-Kinney Moller</field>
+            <field name="imo_number">IMO 9619907</field>
+            <field name="vessel_type">container</field>
+            <field name="flag_state">Denmark</field>
+            <field name="year_built">2013</field>
+            <field name="dwt">194849</field>
+            <field name="grt">194849</field>
+            <field name="loa">399</field>
+            <field name="beam">59</field>
+            <field name="draft">16.0</field>
+            <field name="owner_id" ref="partner_maersk"/>
+            <field name="status">available</field>
+            <field name="classification_society">ABS</field>
+        </record>
+
+        <record id="vessel_msc_gulsun" model="nautix.vessel">
+            <field name="name">MSC Gulsun</field>
+            <field name="imo_number">IMO 9839430</field>
+            <field name="vessel_type">container</field>
+            <field name="flag_state">Panama</field>
+            <field name="year_built">2019</field>
+            <field name="dwt">228149</field>
+            <field name="grt">232618</field>
+            <field name="loa">400</field>
+            <field name="beam">61.5</field>
+            <field name="draft">16.5</field>
+            <field name="owner_id" ref="partner_msc"/>
+            <field name="status">available</field>
+            <field name="classification_society">DNV</field>
+        </record>
+
+        <record id="vessel_cosco_universe" model="nautix.vessel">
+            <field name="name">COSCO Shipping Universe</field>
+            <field name="imo_number">IMO 9810252</field>
+            <field name="vessel_type">container</field>
+            <field name="flag_state">Hong Kong</field>
+            <field name="year_built">2018</field>
+            <field name="dwt">199000</field>
+            <field name="grt">215553</field>
+            <field name="loa">400</field>
+            <field name="beam">58.6</field>
+            <field name="draft">16.0</field>
+            <field name="owner_id" ref="partner_cosco"/>
+            <field name="status">available</field>
+            <field name="classification_society">CCS</field>
+        </record>
+
+        <record id="vessel_berge_olympus" model="nautix.vessel">
+            <field name="name">Berge Olympus</field>
+            <field name="imo_number">IMO 9750957</field>
+            <field name="vessel_type">bulk_carrier</field>
+            <field name="flag_state">Isle of Man</field>
+            <field name="year_built">2018</field>
+            <field name="dwt">211000</field>
+            <field name="grt">107561</field>
+            <field name="loa">300</field>
+            <field name="beam">50</field>
+            <field name="draft">18.5</field>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="status">available</field>
+            <field name="classification_society">DNV</field>
+        </record>
+
+        <record id="vessel_ocean_victoria" model="nautix.vessel">
+            <field name="name">Ocean Victoria</field>
+            <field name="imo_number">IMO 9801234</field>
+            <field name="vessel_type">bulk_carrier</field>
+            <field name="flag_state">Singapore</field>
+            <field name="year_built">2020</field>
+            <field name="dwt">82000</field>
+            <field name="grt">44000</field>
+            <field name="loa">229</field>
+            <field name="beam">32.2</field>
+            <field name="draft">14.5</field>
+            <field name="owner_id" ref="partner_pacific_star"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_star_atlantic" model="nautix.vessel">
+            <field name="name">Star Atlantic</field>
+            <field name="imo_number">IMO 9705566</field>
+            <field name="vessel_type">bulk_carrier</field>
+            <field name="flag_state">Liberia</field>
+            <field name="year_built">2015</field>
+            <field name="dwt">64000</field>
+            <field name="grt">36000</field>
+            <field name="loa">199.9</field>
+            <field name="beam">32.2</field>
+            <field name="draft">13.0</field>
+            <field name="owner_id" ref="partner_aegean_maritime"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_cape_town_eagle" model="nautix.vessel">
+            <field name="name">Cape Town Eagle</field>
+            <field name="imo_number">IMO 9648900</field>
+            <field name="vessel_type">bulk_carrier</field>
+            <field name="flag_state">Marshall Islands</field>
+            <field name="year_built">2014</field>
+            <field name="dwt">180000</field>
+            <field name="grt">94000</field>
+            <field name="loa">292</field>
+            <field name="beam">45</field>
+            <field name="draft">18.2</field>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_emerald_sea" model="nautix.vessel">
+            <field name="name">Emerald Sea</field>
+            <field name="imo_number">IMO 9854321</field>
+            <field name="vessel_type">tanker</field>
+            <field name="flag_state">Greece</field>
+            <field name="year_built">2021</field>
+            <field name="dwt">158000</field>
+            <field name="grt">81000</field>
+            <field name="loa">274</field>
+            <field name="beam">48</field>
+            <field name="draft">17.1</field>
+            <field name="owner_id" ref="partner_aegean_maritime"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_desert_rose" model="nautix.vessel">
+            <field name="name">Desert Rose</field>
+            <field name="imo_number">IMO 9712345</field>
+            <field name="vessel_type">tanker</field>
+            <field name="flag_state">UAE</field>
+            <field name="year_built">2016</field>
+            <field name="dwt">110000</field>
+            <field name="grt">58000</field>
+            <field name="loa">245</field>
+            <field name="beam">42</field>
+            <field name="draft">15.0</field>
+            <field name="owner_id" ref="partner_gulf_tanker"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_nordic_nexus" model="nautix.vessel">
+            <field name="name">Nordic Nexus</field>
+            <field name="imo_number">IMO 9723456</field>
+            <field name="vessel_type">tanker</field>
+            <field name="flag_state">Norway</field>
+            <field name="year_built">2017</field>
+            <field name="dwt">50000</field>
+            <field name="grt">30000</field>
+            <field name="loa">183</field>
+            <field name="beam">32.2</field>
+            <field name="draft">11.5</field>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_arctic_explorer" model="nautix.vessel">
+            <field name="name">Arctic Explorer</field>
+            <field name="imo_number">IMO 9834567</field>
+            <field name="vessel_type">lng</field>
+            <field name="flag_state">Norway</field>
+            <field name="year_built">2019</field>
+            <field name="dwt">85000</field>
+            <field name="grt">115000</field>
+            <field name="loa">290</field>
+            <field name="beam">46</field>
+            <field name="draft">11.8</field>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_aegean_blue" model="nautix.vessel">
+            <field name="name">Aegean Blue</field>
+            <field name="imo_number">IMO 9845678</field>
+            <field name="vessel_type">lng</field>
+            <field name="flag_state">Greece</field>
+            <field name="year_built">2020</field>
+            <field name="dwt">90000</field>
+            <field name="grt">120000</field>
+            <field name="loa">299</field>
+            <field name="beam">48</field>
+            <field name="draft">12.5</field>
+            <field name="owner_id" ref="partner_aegean_maritime"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_qatar_spirit" model="nautix.vessel">
+            <field name="name">Qatar Spirit</field>
+            <field name="imo_number">IMO 9856789</field>
+            <field name="vessel_type">lng</field>
+            <field name="flag_state">Qatar</field>
+            <field name="year_built">2021</field>
+            <field name="dwt">95000</field>
+            <field name="grt">125000</field>
+            <field name="loa">315</field>
+            <field name="beam">50</field>
+            <field name="draft">13.0</field>
+            <field name="owner_id" ref="partner_gulf_tanker"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_euro_trans" model="nautix.vessel">
+            <field name="name">Euro Transporter</field>
+            <field name="imo_number">IMO 9612345</field>
+            <field name="vessel_type">roro</field>
+            <field name="flag_state">Belgium</field>
+            <field name="year_built">2014</field>
+            <field name="dwt">15000</field>
+            <field name="grt">45000</field>
+            <field name="loa">199.9</field>
+            <field name="beam">32.2</field>
+            <field name="draft">9.5</field>
+            <field name="owner_id" ref="partner_maersk"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_asia_express" model="nautix.vessel">
+            <field name="name">Asia Express</field>
+            <field name="imo_number">IMO 9623456</field>
+            <field name="vessel_type">roro</field>
+            <field name="flag_state">Singapore</field>
+            <field name="year_built">2015</field>
+            <field name="dwt">16000</field>
+            <field name="grt">48000</field>
+            <field name="loa">210</field>
+            <field name="beam">33</field>
+            <field name="draft">10.0</field>
+            <field name="owner_id" ref="partner_mol"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_global_carrier" model="nautix.vessel">
+            <field name="name">Global Carrier</field>
+            <field name="imo_number">IMO 9634567</field>
+            <field name="vessel_type">roro</field>
+            <field name="flag_state">Panama</field>
+            <field name="year_built">2016</field>
+            <field name="dwt">18000</field>
+            <field name="grt">52000</field>
+            <field name="loa">230</field>
+            <field name="beam">35</field>
+            <field name="draft">10.5</field>
+            <field name="owner_id" ref="partner_cosco"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_blue_horizon" model="nautix.vessel">
+            <field name="name">Blue Horizon</field>
+            <field name="imo_number">IMO 9901234</field>
+            <field name="vessel_type">bulk_carrier</field>
+            <field name="flag_state">Malta</field>
+            <field name="year_built">2023</field>
+            <field name="dwt">38000</field>
+            <field name="grt">24000</field>
+            <field name="loa">180</field>
+            <field name="beam">30</field>
+            <field name="draft">10.5</field>
+            <field name="owner_id" ref="partner_aegean_maritime"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_ocean_pioneer" model="nautix.vessel">
+            <field name="name">Ocean Pioneer</field>
+            <field name="imo_number">IMO 9912345</field>
+            <field name="vessel_type">tanker</field>
+            <field name="flag_state">Singapore</field>
+            <field name="year_built">2024</field>
+            <field name="dwt">75000</field>
+            <field name="grt">42000</field>
+            <field name="loa">228</field>
+            <field name="beam">32.2</field>
+            <field name="draft">14.0</field>
+            <field name="owner_id" ref="partner_pacific_star"/>
+            <field name="status">available</field>
+        </record>
+
+        <record id="vessel_green_wave" model="nautix.vessel">
+            <field name="name">Green Wave</field>
+            <field name="imo_number">IMO 9923456</field>
+            <field name="vessel_type">container</field>
+            <field name="flag_state">Germany</field>
+            <field name="year_built">2024</field>
+            <field name="dwt">32000</field>
+            <field name="grt">28000</field>
+            <field name="loa">195</field>
+            <field name="beam">30</field>
+            <field name="draft">11.0</field>
+            <field name="owner_id" ref="partner_maersk"/>
+            <field name="status">available</field>
         </record>
 
         <!-- ============================================================
@@ -418,6 +818,124 @@
             <field name="notes">Cancelled due to force majeure — port congestion at Tubarao. All costs to be settled per Gencon 2022 clause 18.</field>
         </record>
 
+        <record id="charter_007" model="nautix.charter">
+            <field name="name">CHT/2025/0007</field>
+            <field name="vessel_id" ref="vessel_mol_triumph"/>
+            <field name="charterer_id" ref="partner_bhp"/>
+            <field name="owner_id" ref="partner_mol"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">negotiation</field>
+            <field name="date_start">2025-08-01</field>
+            <field name="date_end">2025-09-15</field>
+            <field name="lump_sum_freight">5500000</field>
+            <field name="load_port_ids" eval="[(4, ref('port_shanghai'))]"/>
+            <field name="discharge_port_ids" eval="[(4, ref('port_busan'))]"/>
+            <field name="cargo_id" ref="cargo_steel"/>
+        </record>
+
+        <record id="charter_008" model="nautix.charter">
+            <field name="name">CHT/2025/0008</field>
+            <field name="vessel_id" ref="vessel_maersk_mcallister"/>
+            <field name="charterer_id" ref="partner_rio_tinto"/>
+            <field name="owner_id" ref="partner_maersk"/>
+            <field name="charter_type">time_charter</field>
+            <field name="state">draft</field>
+            <field name="date_start">2025-09-01</field>
+            <field name="date_end">2025-12-31</field>
+            <field name="hire_rate">28000</field>
+        </record>
+
+        <record id="charter_009" model="nautix.charter">
+            <field name="name">CHT/2025/0009</field>
+            <field name="vessel_id" ref="vessel_msc_gulsun"/>
+            <field name="charterer_id" ref="partner_vale"/>
+            <field name="owner_id" ref="partner_msc"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">draft</field>
+            <field name="date_start">2025-10-01</field>
+            <field name="date_end">2025-11-15</field>
+            <field name="lump_sum_freight">6200000</field>
+        </record>
+
+        <record id="charter_010" model="nautix.charter">
+            <field name="name">CHT/2025/010</field>
+            <field name="vessel_id" ref="vessel_berge_olympus"/>
+            <field name="charterer_id" ref="partner_bhp"/>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">negotiation</field>
+            <field name="cargo_id" ref="cargo_iron_ore"/>
+            <field name="cargo_quantity">200000</field>
+        </record>
+
+        <record id="charter_011" model="nautix.charter">
+            <field name="name">CHT/2025/011</field>
+            <field name="vessel_id" ref="vessel_ocean_victoria"/>
+            <field name="charterer_id" ref="partner_glencore"/>
+            <field name="owner_id" ref="partner_pacific_star"/>
+            <field name="charter_type">time_charter</field>
+            <field name="state">draft</field>
+            <field name="hire_rate">19000</field>
+        </record>
+
+        <record id="charter_012" model="nautix.charter">
+            <field name="name">CHT/2025/012</field>
+            <field name="vessel_id" ref="vessel_emerald_sea"/>
+            <field name="charterer_id" ref="partner_crestline"/>
+            <field name="owner_id" ref="partner_aegean_maritime"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">draft</field>
+            <field name="cargo_id" ref="cargo_crude_oil"/>
+        </record>
+
+        <record id="charter_013" model="nautix.charter">
+            <field name="name">CHT/2025/013</field>
+            <field name="vessel_id" ref="vessel_nordic_nexus"/>
+            <field name="charterer_id" ref="partner_glencore"/>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">negotiation</field>
+            <field name="cargo_id" ref="cargo_fuel_oil"/>
+        </record>
+
+        <record id="charter_014" model="nautix.charter">
+            <field name="name">CHT/2025/014</field>
+            <field name="vessel_id" ref="vessel_arctic_explorer"/>
+            <field name="charterer_id" ref="partner_maersk"/>
+            <field name="owner_id" ref="partner_nordic_bulk"/>
+            <field name="charter_type">time_charter</field>
+            <field name="state">draft</field>
+            <field name="hire_rate">45000</field>
+        </record>
+
+        <record id="charter_015" model="nautix.charter">
+            <field name="name">CHT/2025/015</field>
+            <field name="vessel_id" ref="vessel_euro_trans"/>
+            <field name="charterer_id" ref="partner_atlas_commodities"/>
+            <field name="owner_id" ref="partner_maersk"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">draft</field>
+        </record>
+
+        <record id="charter_016" model="nautix.charter">
+            <field name="name">CHT/2025/016</field>
+            <field name="vessel_id" ref="vessel_green_wave"/>
+            <field name="charterer_id" ref="partner_meridian_grain"/>
+            <field name="owner_id" ref="partner_maersk"/>
+            <field name="charter_type">time_charter</field>
+            <field name="state">negotiation</field>
+            <field name="hire_rate">12000</field>
+        </record>
+
+        <record id="charter_017" model="nautix.charter">
+            <field name="name">CHT/2025/017</field>
+            <field name="vessel_id" ref="vessel_ocean_pioneer"/>
+            <field name="charterer_id" ref="partner_meridian_grain"/>
+            <field name="owner_id" ref="partner_pacific_star"/>
+            <field name="charter_type">voyage_charter</field>
+            <field name="state">draft</field>
+        </record>
+
         <!-- ============================================================
              VOYAGES (nautix.voyage)
              ============================================================ -->
@@ -491,7 +1009,7 @@
              ============================================================ -->
 
         <record id="nautix.seq_nautix_charter" model="ir.sequence">
-            <field name="number_next">7</field>
+            <field name="number_next">18</field>
         </record>
 
     </data>
