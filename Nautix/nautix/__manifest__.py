@@ -1,3 +1,4 @@
+# this is the main manifest defining module metadata and dependencies
 {
     "name": "Nautix — Ship Chartering",
     "version": "19.0.1.0.0",

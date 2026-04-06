@@ -1,3 +1,4 @@
+# this model tracks individual ship journeys
 from odoo import models, fields
 
 

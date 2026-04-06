@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!-- # this defines the auto-incrementing reference format for chartering contracts -->
     <record id="seq_nautix_charter" model="ir.sequence">
         <field name="name">Charter Reference</field>
         <field name="code">nautix.charter</field>

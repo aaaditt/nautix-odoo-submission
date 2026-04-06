@@ -1,3 +1,4 @@
+# this model manages individual billing periods for time-charters
 from odoo import models, fields, api
 
 

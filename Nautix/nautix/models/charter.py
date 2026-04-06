@@ -1,3 +1,4 @@
+# this is the core chartering contract model
 from odoo import models, fields, api
 
 

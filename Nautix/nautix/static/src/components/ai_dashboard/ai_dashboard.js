@@ -1,4 +1,5 @@
 /** @odoo-module **/
+// below are the ai chatbot frontend instructions and state management
 
 import { Component, useState, useRef, onWillStart } from "@odoo/owl";
 import { registry } from "@web/core/registry";

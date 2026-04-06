@@ -1,3 +1,4 @@
+# this model defines various types of shipping cargo
 from odoo import models, fields
 
 
